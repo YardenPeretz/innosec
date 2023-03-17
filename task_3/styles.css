@@ -1,0 +1,44 @@
+.container{
+    width: 800px;
+}
+#table {
+    width: 100%;
+}
+#table thead{
+    width: 100%;
+    background-color: lightgray;
+}
+#table thead tr{
+    width: 33%;
+    text-align: center;
+}
+#table tbody{
+    width: 100%;
+}
+#table tbody tr td{
+    width: 33%;
+    border: 1px solid black;
+    text-align: center;
+}
+.hidden{
+    display: none;
+}
+#pagination-numbers{
+    padding: 0;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+#pagination-numbers button{
+    margin: 1px;
+    padding: 15px;
+    width: 50px;
+}
+.pagination-numbers.active {
+    color: #fff;
+}
+.wrap-btns{
+    display: flex;
+    flex-wrap: nowrap;
+}

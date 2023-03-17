@@ -1,0 +1,44 @@
+sources - 
+1. https://www.digitalocean.com/community/tutorials/how-to-move-an-apache-web-root-to-a-new-location-on-ubuntu-20-04
+2. my friend max (maxter)
+
+
+Steps for new website configurations : 
+
+1. We will have to create new directory for the website /storm/www/
+with root permissions.
+Command - mkdir /storm/www/newsite
+
+2. Create new VH config file (using root permissions) - 
+* cd ~/
+* nano /etc/apache/sites-available/newsite.conf
+* Add the following code - 
+
+<VirtualHost *:443>
+    ServerName newsite.srv-jezz-dev1.logdev.local
+    DocumentRoot /storm/www/newsite/
+
+    <Directory /storm/www/newsite/>
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    SSLEngine on
+    SSLCertificateFile /etc/ssl/certs/ssl-cert-snakeoil.pem
+    SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+
+    ErrorLog ${APACHE_LOG_DIR}/newsite_error.log
+    CustomLog ${APACHE_LOG_DIR}/newsite_access.log combined
+</VirtualHost>
+
+3. Enable <VirtualHost> - a2ensite newsite.conf
+
+4. Enable apache module - a2enmod ssl rewrite
+
+5. cd /etc
+
+6. nano hosts, add this line - 127.0.0.1 newsite.srv-jezz-dev1.logdev.local
+
+7. restart apache - systemctl restart apache2
+
+8. Open browser and go to - https://newsite.srv-jezz-dev1.logdev.local/
